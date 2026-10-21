@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Pegy ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle, #200105 0%, #070002 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        /* Contenedor Principal (Estilo Entrada de Cine de Terror) */
+        .card {
+            background: #141414;
+            border: 2px dashed #e50914; /* Rojo tipo cine/Netflix */
+            border-radius: 15px;
+            padding: 40px 30px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(229, 9, 20, 0.2);
+            position: relative;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Decoración de boleto */
+        .card::before, .card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            background: #070002;
+            border-radius: 50%;
+        }
+        .card::before { left: -16px; transform: translateY(-50%); border-right: 2px dashed #e50914; }
+        .card::after { right: -16px; transform: translateY(-50%); border-left: 2px dashed #e50914; }
+
+        /* Estados de las pantallas */
+        .step {
+            display: none;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        /* Tipografías y Textos */
+        h1 {
+            font-size: 1.8rem;
+            color: #e50914;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        .highlight {
+            color: #ff333f;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(255, 51, 63, 0.5);
+        }
+
+        /* Botones Generales */
+        .btn {
+            background-color: #e50914;
+            color: white;
+            padding: 12px 35px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #ff1f29;
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
+        }
+
+        /* Estilos del juego Multiple Choice (Paso 3) */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option-btn {
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-btn:hover {
+            background: #333;
+            border-color: #e50914;
+        }
+
+        .option-btn.selected {
+            background: #e50914;
+            border-color: #ff333f;
+            font-weight: bold;
+        }
+
+        /* Pantalla Final Éxito */
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .ghost-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 4s linear forwards;
+            font-size: 1.5rem;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        
+        <!-- PASO 1: Bienvenida -->
+        <div id="step-1" class="step active">
+            <h1>¡Hola Pegy! ❤️</h1>
+            <p>Tengo una invitación muy especial para hacerte...</p>
+            <button class="btn" onclick="cambiarPaso(2)">Ver más</button>
+        </div>
+
+        <!-- PASO 2: La Propuesta -->
+        <div id="step-2" class="step">
+            <h1>Una noche de novios 🥂</h1>
+            <p>Salida al cine a ver una peli de <span class="highlight">¡TERROR! 🍿👻</span></p>
+            <button class="btn" onclick="cambiarPaso(3)">Ver más</button>
+        </div>
+
+        <!-- PASO 3: Selección de película (Multiple Choice) -->
+        <div id="step-3" class="step">
+            <h1>Elegí la peli 🎬</h1>
+            <p style="font-size: 1rem; margin-bottom: 15px;">¿Cuál te animás a ver conmigo?</p>
+            
+            <div class="options-container">
+                <button class="option-btn" onclick="seleccionarOpcion(this, 'El Conjuro')">🎬 El Conjuro (Un clásico que no falla)</button>
+                <button class="option-btn" onclick="seleccionarOpcion(this, 'Sonríe (Smile)')">🍿 Sonríe (Para morderse las uñas)</button>
+                <button class="option-btn" onclick="seleccionarOpcion(this, 'Una nueva de cartelera')">🎟️ La que esté de estreno en cartelera</button>
+                <button class="option-btn" onclick="seleccionarOpcion(this, 'La que vos quieras')">👹 La que vos elijas (Yo te protejo)</button>
+            </div>
+
+            <button class="btn" id="submit-choice" onclick="finalizar()" disabled style="opacity: 0.5; cursor: not-allowed;">Confirmar Cita</button>
+        </div>
+
+        <!-- PASO 4: Confirmación Final -->
+        <div id="step-4" class="step">
+            <div class="success-icon">🦇❤️🎬</div>
+            <h1>¡Trato hecho!</h1>
+            <p>Ya quedó agendada nuestra noche de terror. ¡Preparate para los sustos!</p>
+            <p style="font-size: 1rem; color: #aaa;">Película elegida:<br><strong id="pelicula-final" style="color: #e50914;"></strong></p>
+        </div>
+
+    </div>
+
+    <script>
+        let peliculaSeleccionada = "";
+
+        // Cambiar entre pantallas eficientemente
+        function cambiarPaso(numeroPaso) {
+            document.querySelector('.step.active').classList.remove('active');
+            document.getElementById(`step-${numeroPaso}`).classList.add('active');
+        }
+
+        // Manejar la selección del Multiple Choice
+        function seleccionarOpcion(boton, nombrePeli) {
+            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+            boton.classList.add('selected');
+            peliculaSeleccionada = nombrePeli;
+
+            const btnConfirmar = document.getElementById('submit-choice');
+            btnConfirmar.disabled = false;
+            btnConfirmar.style.opacity = "1";
+            btnConfirmar.style.cursor = "pointer";
+        }
+
+        // Pantalla final con efectos de "fantasmas/murciélagos" cariñosos
+        function finalizar() {
+            document.getElementById('pelicula-final').innerText = peliculaSeleccionada;
+            cambiarPaso(4);
+            lanzarEfectosTerror();
+        }
+
+        // Genera iconos flotantes de fondo al terminar
+        function lanzarEfectosTerror() {
+            const iconos = ['👻', '🦇', '🍿', '❤️', '🎬'];
+            for (let i = 0; i < 35; i++) {
+                setTimeout(() => {
+                    const particula = document.createElement('div');
+                    particula.classList.add('ghost-particle');
+                    particula.innerText = iconos[Math.floor(Math.random() * iconos.length)];
+                    particula.style.left = Math.random() * 100 + 'vw';
+                    particula.style.animationDuration = Math.random() * (4 - 2) + 2 + 's';
+                    
+                    document.body.appendChild(particula);
+                    setTimeout(() => particula.remove(), 4000);
+                }, i * 120);
+            }
+        }
+    </script>
+</body>
+</html>
