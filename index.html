@@ -25,9 +25,9 @@
         /* Contenedor Principal (Estilo Entrada de Cine de Terror) */
         .card {
             background: #141414;
-            border: 2px dashed #e50914; /* Rojo tipo cine/Netflix */
+            border: 2px dashed #e50914; 
             border-radius: 15px;
-            padding: 40px 30px;
+            padding: 35px 30px;
             width: 400px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(229, 9, 20, 0.2);
@@ -58,18 +58,42 @@
             display: block;
         }
 
+        /* Dibujo del Cerdito en CSS/SVG Animado */
+        .pig-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px auto;
+            animation: floatPig 3s ease-in-out infinite;
+        }
+
+        .pig-ear {
+            animation: twitchEar 4s ease-in-out infinite;
+            transform-origin: 50px 30px;
+        }
+
+        @keyframes floatPig {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes twitchEar {
+            0%, 90%, 100% { transform: rotate(0deg); }
+            93%, 97% { transform: rotate(-8deg); }
+            95% { transform: rotate(4deg); }
+        }
+
         /* Tipografías y Textos */
         h1 {
             font-size: 1.8rem;
             color: #e50914;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             letter-spacing: 1px;
         }
 
         p {
             font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             color: #e0e0e0;
         }
 
@@ -82,11 +106,18 @@
             text-shadow: 0 0 10px rgba(255, 51, 63, 0.5);
         }
 
+        /* Contenedor de botones iniciales */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
         /* Botones Generales */
         .btn {
             background-color: #e50914;
             color: white;
-            padding: 12px 35px;
+            padding: 12px 30px;
             font-size: 1rem;
             font-weight: bold;
             border: none;
@@ -100,6 +131,18 @@
             transform: scale(1.05);
             background-color: #ff1f29;
             box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: #333;
+            color: #aaa;
+            box-shadow: none;
+        }
+        .btn-secondary:hover {
+            background-color: #444;
+            color: #fff;
+            transform: none;
+            box-shadow: none;
         }
 
         /* Estilos del juego Multiple Choice (Paso 3) */
@@ -171,30 +214,50 @@
 
     <div class="card">
         
-        <!-- PASO 1: Bienvenida -->
+        <!-- PASO 1: Bienvenida e Invitación Inicial -->
         <div id="step-1" class="step active">
+            <div class="pig-container">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                    <ellipse class="pig-ear" cx="28" cy="28" rx="10" ry="14" fill="#ff8da1" transform="rotate(-15 28 28)" />
+                    <ellipse class="pig-ear" cx="72" cy="28" rx="10" ry="14" fill="#ff8da1" transform="rotate(15 72 28)" />
+                    <ellipse cx="28" cy="28" rx="5" ry="8" fill="#fca3b5" transform="rotate(-15 28 28)" />
+                    <ellipse cx="72" cy="28" rx="5" ry="8" fill="#fca3b5" transform="rotate(15 72 28)" />
+                    <circle cx="50" cy="53" r="34" fill="#ff99ad" />
+                    <circle cx="38" cy="48" r="4.5" fill="#1c1c1c" />
+                    <circle cx="36" cy="46" r="1.5" fill="#ffffff" />
+                    <circle cx="62" cy="48" r="4.5" fill="#1c1c1c" />
+                    <circle cx="60" cy="46" r="1.5" fill="#ffffff" />
+                    <circle cx="24" cy="56" r="5" fill="#ff6b8b" opacity="0.6" />
+                    <circle cx="76" cy="56" r="5" fill="#ff6b8b" opacity="0.6" />
+                    <ellipse cx="50" cy="62" rx="14" ry="9" fill="#ff708d" />
+                    <circle cx="45" cy="62" r="2.5" fill="#cc4461" />
+                    <circle cx="55" cy="62" r="2.5" fill="#cc4461" />
+                </svg>
+            </div>
             <h1>¡Hola Pegy! ❤️</h1>
             <p>Tengo una invitación muy especial para hacerte...</p>
-            <button class="btn" onclick="cambiarPaso(2)">Ver más</button>
+            <div class="btn-group">
+                <button class="btn" onclick="cambiarPaso(2)">Aceptar</button>
+                <button class="btn btn-secondary" onclick="alert('Piénsalo bien 🥺... ¡La invitación sigue en pie!')">No</button>
+            </div>
         </div>
 
-        <!-- PASO 2: La Propuesta -->
+        <!-- PASO 2: La Propuesta del Cine -->
         <div id="step-2" class="step">
-            <h1>Una noche de novios 🥂</h1>
-            <p>Salida al cine a ver una peli de <span class="highlight">¡TERROR! 🍿👻</span></p>
+            <div style="font-size: 3.5rem; margin-bottom: 10px;">🍿🎬</div>
+            <h1>Una noche de novios</h1>
+            <p>Salida al cine a ver una peli de <span class="highlight">¡TERROR! 👻🔥</span></p>
             <button class="btn" onclick="cambiarPaso(3)">Ver más</button>
         </div>
 
-        <!-- PASO 3: Selección de película (Multiple Choice) -->
+        <!-- PASO 3: Selección de película en Moreno -->
         <div id="step-3" class="step">
-            <h1>Elegí la peli 🎬</h1>
-            <p style="font-size: 1rem; margin-bottom: 15px;">¿Cuál te animás a ver conmigo?</p>
+            <h1>Elegí la peli 🎟️</h1>
+            <p style="font-size: 1rem; margin-bottom: 15px;">📍 Cine de Moreno</p>
             
             <div class="options-container">
-                <button class="option-btn" onclick="seleccionarOpcion(this, 'El Conjuro')">🎬 El Conjuro (Un clásico que no falla)</button>
-                <button class="option-btn" onclick="seleccionarOpcion(this, 'Sonríe (Smile)')">🍿 Sonríe (Para morderse las uñas)</button>
-                <button class="option-btn" onclick="seleccionarOpcion(this, 'Una nueva de cartelera')">🎟️ La que esté de estreno en cartelera</button>
-                <button class="option-btn" onclick="seleccionarOpcion(this, 'La que vos quieras')">👹 La que vos elijas (Yo te protejo)</button>
+                <button class="option-btn" onclick="seleccionarOpcion(this, 'Madre siniestra (A la noche)')">👹 Madre siniestra (A la noche)</button>
+                <button class="option-btn" onclick="seleccionarOpcion(this, 'Resident evil (A la noche)')">🧟 Resident evil (A la noche)</button>
             </div>
 
             <button class="btn" id="submit-choice" onclick="finalizar()" disabled style="opacity: 0.5; cursor: not-allowed;">Confirmar Cita</button>
@@ -202,24 +265,22 @@
 
         <!-- PASO 4: Confirmación Final -->
         <div id="step-4" class="step">
-            <div class="success-icon">🦇❤️🎬</div>
+            <div class="success-icon">🐷🍿❤️</div>
             <h1>¡Trato hecho!</h1>
-            <p>Ya quedó agendada nuestra noche de terror. ¡Preparate para los sustos!</p>
-            <p style="font-size: 1rem; color: #aaa;">Película elegida:<br><strong id="pelicula-final" style="color: #e50914;"></strong></p>
+            <p>Ya quedó agendada nuestra noche de terror en Moreno. ¡Preparate para los sustos!</p>
+            <p style="font-size: 1.1rem; color: #aaa; margin-top: 15px;">Película elegida:<br><strong id="pelicula-final" style="color: #e50914; display:block; margin-top:5px;"></strong></p>
         </div>
 
     </div>
 
-    <script>
+    <script {verify_synthid}>
         let peliculaSeleccionada = "";
 
-        // Cambiar entre pantallas eficientemente
         function cambiarPaso(numeroPaso) {
             document.querySelector('.step.active').classList.remove('active');
             document.getElementById(`step-${numeroPaso}`).classList.add('active');
         }
 
-        // Manejar la selección del Multiple Choice
         function seleccionarOpcion(boton, nombrePeli) {
             document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
             boton.classList.add('selected');
@@ -227,33 +288,3 @@
 
             const btnConfirmar = document.getElementById('submit-choice');
             btnConfirmar.disabled = false;
-            btnConfirmar.style.opacity = "1";
-            btnConfirmar.style.cursor = "pointer";
-        }
-
-        // Pantalla final con efectos de "fantasmas/murciélagos" cariñosos
-        function finalizar() {
-            document.getElementById('pelicula-final').innerText = peliculaSeleccionada;
-            cambiarPaso(4);
-            lanzarEfectosTerror();
-        }
-
-        // Genera iconos flotantes de fondo al terminar
-        function lanzarEfectosTerror() {
-            const iconos = ['👻', '🦇', '🍿', '❤️', '🎬'];
-            for (let i = 0; i < 35; i++) {
-                setTimeout(() => {
-                    const particula = document.createElement('div');
-                    particula.classList.add('ghost-particle');
-                    particula.innerText = iconos[Math.floor(Math.random() * iconos.length)];
-                    particula.style.left = Math.random() * 100 + 'vw';
-                    particula.style.animationDuration = Math.random() * (4 - 2) + 2 + 's';
-                    
-                    document.body.appendChild(particula);
-                    setTimeout(() => particula.remove(), 4000);
-                }, i * 120);
-            }
-        }
-    </script>
-</body>
-</html>
