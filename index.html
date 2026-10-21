@@ -1,290 +1,580 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Pegy ❤️</title>
+
+    <title>Una sorpresa para Pegy 🐷❤️</title>
+
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: radial-gradient(circle, #200105 0%, #070002 100%);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            color: #fff;
-        }
-
-        /* Contenedor Principal (Estilo Entrada de Cine de Terror) */
-        .card {
-            background: #141414;
-            border: 2px dashed #e50914; 
-            border-radius: 15px;
-            padding: 35px 30px;
-            width: 400px;
+            margin: 0;
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            padding: 22px;
+            background: radial-gradient(
+                circle at top,
+                #510d23,
+                #16040d 60%,
+                #080207
+            );
+            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(229, 9, 20, 0.2);
-            position: relative;
-            transition: all 0.5s ease-in-out;
+            overflow-x: hidden;
         }
 
-        /* Decoración de boleto */
-        .card::before, .card::after {
+        /* TARJETA PRINCIPAL */
+
+        .card {
+            position: relative;
+            width: min(100%, 430px);
+            padding: 35px 26px;
+            background: linear-gradient(145deg, #25101a, #110b11);
+            border: 2px dashed #ff668e;
+            border-radius: 22px;
+            box-shadow:
+                0 20px 70px #0009,
+                0 0 35px #ff477733;
+        }
+
+        .card::before,
+        .card::after {
             content: '';
             position: absolute;
             top: 50%;
-            width: 30px;
-            height: 30px;
-            background: #070002;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
+            background: #19040d;
         }
-        .card::before { left: -16px; transform: translateY(-50%); border-right: 2px dashed #e50914; }
-        .card::after { right: -16px; transform: translateY(-50%); border-left: 2px dashed #e50914; }
 
-        /* Estados de las pantallas */
+        .card::before {
+            left: -14px;
+        }
+
+        .card::after {
+            right: -14px;
+        }
+
+        /* PANTALLAS */
+
         .step {
             display: none;
-            animation: fadeIn 0.6s ease forwards;
+            animation: appear 0.45s ease;
         }
 
         .step.active {
             display: block;
         }
 
-        /* Dibujo del Cerdito en CSS/SVG Animado */
-        .pig-container {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 15px auto;
-            animation: floatPig 3s ease-in-out infinite;
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .pig-ear {
-            animation: twitchEar 4s ease-in-out infinite;
-            transform-origin: 50px 30px;
-        }
-
-        @keyframes floatPig {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        @keyframes twitchEar {
-            0%, 90%, 100% { transform: rotate(0deg); }
-            93%, 97% { transform: rotate(-8deg); }
-            95% { transform: rotate(4deg); }
-        }
-
-        /* Tipografías y Textos */
         h1 {
-            font-size: 1.8rem;
-            color: #e50914;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
+            color: #ff759a;
+            font-size: clamp(1.55rem, 6vw, 2rem);
+            margin: 12px 0;
         }
 
         p {
-            font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 25px;
-            color: #e0e0e0;
+            color: #f6dce5;
+            font-size: 1.08rem;
         }
 
-        .highlight {
-            color: #ff333f;
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-            font-size: 1.3rem;
-            text-shadow: 0 0 10px rgba(255, 51, 63, 0.5);
+        /* CERDITO ANIMADO */
+
+        .pig {
+            font-size: 5rem;
+            display: inline-block;
+            animation: bob 2.5s ease-in-out infinite;
         }
 
-        /* Contenedor de botones iniciales */
-        .btn-group {
+        @keyframes bob {
+            50% {
+                transform: translateY(-9px) rotate(-5deg);
+            }
+        }
+
+        /* BOTONES */
+
+        .buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
-        }
-
-        /* Botones Generales */
-        .btn {
-            background-color: #e50914;
-            color: white;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            background-color: #ff1f29;
-            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
-        }
-
-        .btn-secondary {
-            background-color: #333;
-            color: #aaa;
-            box-shadow: none;
-        }
-        .btn-secondary:hover {
-            background-color: #444;
-            color: #fff;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Estilos del juego Multiple Choice (Paso 3) */
-        .options-container {
-            display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 25px;
+            margin-top: 25px;
         }
 
-        .option-btn {
-            background: #222;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 14px;
-            border-radius: 8px;
+        button {
+            font: inherit;
             cursor: pointer;
+            border: 0;
+            border-radius: 30px;
+            padding: 13px 23px;
+            font-weight: 700;
+            transition:
+                transform 0.2s,
+                background 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            transform: scale(1.05);
+        }
+
+        button:focus-visible {
+            outline: 3px solid white;
+            outline-offset: 4px;
+        }
+
+        .primary {
+            background: #f34472;
+            color: white;
+            box-shadow: 0 5px 20px #f3447255;
+        }
+
+        .secondary {
+            background: #3c2a35;
+            color: white;
+        }
+
+        .primary:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        /* OPCIONES DE PELÍCULAS */
+
+        .choice {
+            display: block;
+            width: 100%;
             text-align: left;
+            background: #2d1b27;
+            color: white;
+            border: 1px solid #795064;
+            margin: 12px 0;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+
+        .choice.selected {
+            background: #85304f;
+            border: 2px solid #ff93b0;
+        }
+
+        .choice small {
+            display: block;
+            color: #ffd5e0;
+            margin-left: 30px;
+        }
+
+        .note {
+            min-height: 25px;
+            font-size: 0.95rem;
+            color: #ffb4ca;
+        }
+
+        /* ENTRADA FINAL */
+
+        .ticket {
+            border: 1px dashed #ff8ca9;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            background: #3c1728;
+        }
+
+        .ticket strong {
+            display: block;
+            color: #ff9db8;
+            font-size: 1.3rem;
+            margin: 8px 0;
+        }
+
+        .eyebrow {
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            color: #ffc5d6;
+        }
+
+        .emoji {
+            font-size: 3.2rem;
+        }
+
+        .footer {
+            font-size: 0.85rem;
+            color: #cdaab9;
+            margin-top: 22px;
+        }
+
+        /* BOTÓN WHATSAPP */
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 30px;
             font-size: 1rem;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .option-btn:hover {
-            background: #333;
-            border-color: #e50914;
-        }
-
-        .option-btn.selected {
-            background: #e50914;
-            border-color: #ff333f;
             font-weight: bold;
+            box-shadow: 0 5px 20px #25d36644;
         }
 
-        /* Pantalla Final Éxito */
-        .success-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            animation: pulse 1.5s infinite;
+        .whatsapp-btn:hover {
+            background: #1ebe5d;
+            transform: scale(1.04);
         }
 
-        /* Animaciones */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* CELULARES */
+
+        @media (max-width: 400px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .buttons {
+                gap: 10px;
+            }
+
+            button {
+                padding: 12px 18px;
+            }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .ghost-particle {
-            position: absolute;
-            pointer-events: none;
-            animation: floatUp 4s linear forwards;
-            font-size: 1.5rem;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
     </style>
 </head>
+
 <body>
 
-    <div class="card">
-        
-        <!-- PASO 1: Bienvenida e Invitación Inicial -->
-        <div id="step-1" class="step active">
-            <div class="pig-container">
-                <svg viewBox="0 0 100 100" width="100%" height="100%">
-                    <ellipse class="pig-ear" cx="28" cy="28" rx="10" ry="14" fill="#ff8da1" transform="rotate(-15 28 28)" />
-                    <ellipse class="pig-ear" cx="72" cy="28" rx="10" ry="14" fill="#ff8da1" transform="rotate(15 72 28)" />
-                    <ellipse cx="28" cy="28" rx="5" ry="8" fill="#fca3b5" transform="rotate(-15 28 28)" />
-                    <ellipse cx="72" cy="28" rx="5" ry="8" fill="#fca3b5" transform="rotate(15 72 28)" />
-                    <circle cx="50" cy="53" r="34" fill="#ff99ad" />
-                    <circle cx="38" cy="48" r="4.5" fill="#1c1c1c" />
-                    <circle cx="36" cy="46" r="1.5" fill="#ffffff" />
-                    <circle cx="62" cy="48" r="4.5" fill="#1c1c1c" />
-                    <circle cx="60" cy="46" r="1.5" fill="#ffffff" />
-                    <circle cx="24" cy="56" r="5" fill="#ff6b8b" opacity="0.6" />
-                    <circle cx="76" cy="56" r="5" fill="#ff6b8b" opacity="0.6" />
-                    <ellipse cx="50" cy="62" rx="14" ry="9" fill="#ff708d" />
-                    <circle cx="45" cy="62" r="2.5" fill="#cc4461" />
-                    <circle cx="55" cy="62" r="2.5" fill="#cc4461" />
-                </svg>
+<main class="card" aria-live="polite">
+
+    <!-- PANTALLA 1: INVITACIÓN -->
+
+    <section class="step active" id="step-1">
+
+        <div class="pig" role="img" aria-label="Cerdito">
+            🐷
+        </div>
+
+        <h1>¡Hola, Pegy! ❤️</h1>
+
+        <p>
+            Hay alguien que quiere invitarte a un
+            plan muy especial…
+
+            ¿Aceptás descubrir la sorpresa? 🥹💌
+        </p>
+
+        <div class="buttons">
+
+            <button class="primary" onclick="go(2)">
+                ¡Sí, acepto! 💕
+            </button>
+
+            <button class="secondary" onclick="decline()">
+                No 😢
+            </button>
+
+        </div>
+
+        <p class="note" id="no-message" role="status"></p>
+
+    </section>
+
+
+    <!-- PANTALLA 2: SORPRESA DEL CINE -->
+
+    <section class="step" id="step-2">
+
+        <div class="emoji">🎬🍿🐷</div>
+
+        <h1>¡Tenemos una cita!</h1>
+
+        <p>
+            Te invito a una noche de novios,
+            pochoclos, abrazos y una película de…
+
+            <strong>¡TERROR! 👻❤️</strong>
+        </p>
+
+        <p>
+            📍 Moreno
+            <br>
+            🌙 Función nocturna
+        </p>
+
+        <button class="primary" onclick="go(3)">
+            Ver más 🎟️
+        </button>
+
+    </section>
+
+
+    <!-- PANTALLA 3: ELEGIR PELÍCULA -->
+
+    <section class="step" id="step-3">
+
+        <div class="emoji">🍿🎥</div>
+
+        <h1>Elegí nuestra peli, Pegy</h1>
+
+        <p>
+            Las dos opciones son para ir
+            de noche en Moreno 🌙
+        </p>
+
+        <button
+            class="choice"
+            data-movie="Madre Siniestra"
+            onclick="choose(this)"
+            aria-pressed="false"
+        >
+            👹 Madre Siniestra
+
+            <small>
+                📍 Moreno · 🌙 A la noche
+            </small>
+        </button>
+
+        <button
+            class="choice"
+            data-movie="Resident Evil"
+            onclick="choose(this)"
+            aria-pressed="false"
+        >
+            🧟 Resident Evil
+
+            <small>
+                📍 Moreno · 🌙 A la noche
+            </small>
+        </button>
+
+        <div class="buttons">
+
+            <button class="secondary" onclick="go(2)">
+                ← Volver
+            </button>
+
+            <button
+                class="primary"
+                id="confirm"
+                onclick="finish()"
+                disabled
+            >
+                Confirmar cita ❤️
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- PANTALLA 4: CONFIRMACIÓN -->
+
+    <section class="step" id="step-4">
+
+        <div class="pig">🐷</div>
+
+        <h1>¡Trato hecho, mi amor! ❤️</h1>
+
+        <p>
+            Oficialmente tenemos una cita de terror.
+
+            Yo pongo los abrazos cuando nos asustemos.
+            🥹🍿
+        </p>
+
+        <div class="ticket">
+
+            <div class="eyebrow">
+                🎟️ ENTRADA ESPECIAL PARA PEGY
             </div>
-            <h1>¡Hola Pegy! ❤️</h1>
-            <p>Tengo una invitación muy especial para hacerte...</p>
-            <div class="btn-group">
-                <button class="btn" onclick="cambiarPaso(2)">Aceptar</button>
-                <button class="btn btn-secondary" onclick="alert('Piénsalo bien 🥺... ¡La invitación sigue en pie!')">No</button>
-            </div>
+
+            <strong id="chosen-movie"></strong>
+
+            <div>📍 Moreno</div>
+
+            <div>🌙 Función nocturna · A coordinar</div>
+
+            <div>💑 Dos enamorados + pochoclos</div>
+
         </div>
 
-        <!-- PASO 2: La Propuesta del Cine -->
-        <div id="step-2" class="step">
-            <div style="font-size: 3.5rem; margin-bottom: 10px;">🍿🎬</div>
-            <h1>Una noche de novios</h1>
-            <p>Salida al cine a ver una peli de <span class="highlight">¡TERROR! 👻🔥</span></p>
-            <button class="btn" onclick="cambiarPaso(3)">Ver más</button>
-        </div>
+        <!-- BOTÓN DE WHATSAPP -->
 
-        <!-- PASO 3: Selección de película en Moreno -->
-        <div id="step-3" class="step">
-            <h1>Elegí la peli 🎟️</h1>
-            <p style="font-size: 1rem; margin-bottom: 15px;">📍 Cine de Moreno</p>
-            
-            <div class="options-container">
-                <button class="option-btn" onclick="seleccionarOpcion(this, 'Madre siniestra (A la noche)')">👹 Madre siniestra (A la noche)</button>
-                <button class="option-btn" onclick="seleccionarOpcion(this, 'Resident evil (A la noche)')">🧟 Resident evil (A la noche)</button>
-            </div>
+        <button
+            class="whatsapp-btn"
+            onclick="enviarWhatsApp()"
+        >
+            💚 Enviarle mi respuesta por WhatsApp
+        </button>
 
-            <button class="btn" id="submit-choice" onclick="finalizar()" disabled style="opacity: 0.5; cursor: not-allowed;">Confirmar Cita</button>
-        </div>
+        <p class="footer">
+            Con amor, tu compañera de sustos 💌
+        </p>
 
-        <!-- PASO 4: Confirmación Final -->
-        <div id="step-4" class="step">
-            <div class="success-icon">🐷🍿❤️</div>
-            <h1>¡Trato hecho!</h1>
-            <p>Ya quedó agendada nuestra noche de terror en Moreno. ¡Preparate para los sustos!</p>
-            <p style="font-size: 1.1rem; color: #aaa; margin-top: 15px;">Película elegida:<br><strong id="pelicula-final" style="color: #e50914; display:block; margin-top:5px;"></strong></p>
-        </div>
+        <button class="secondary" onclick="restart()">
+            Volver a ver la invitación 🐽
+        </button>
 
-    </div>
+    </section>
 
-    <script {verify_synthid}>
-        let peliculaSeleccionada = "";
+</main>
 
-        function cambiarPaso(numeroPaso) {
-            document.querySelector('.step.active').classList.remove('active');
-            document.getElementById(`step-${numeroPaso}`).classList.add('active');
-        }
 
-        function seleccionarOpcion(boton, nombrePeli) {
-            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
-            boton.classList.add('selected');
-            peliculaSeleccionada = nombrePeli;
+<!-- JAVASCRIPT -->
 
-            const btnConfirmar = document.getElementById('submit-choice');
-            btnConfirmar.disabled = false;
+<script>
+
+    // VARIABLE PARA GUARDAR LA PELÍCULA
+
+    let movie = '';
+
+
+    // CAMBIAR DE PANTALLA
+
+    function go(n) {
+
+        document.querySelectorAll('.step').forEach(step => {
+            step.classList.remove('active');
+        });
+
+        document.getElementById('step-' + n)
+            .classList.add('active');
+
+    }
+
+
+    // SI PEGY DICE QUE NO
+
+    function decline() {
+
+        document.getElementById('no-message').textContent =
+            'Owww 🥺💔 Bueno, la sorpresa se queda acá… ' +
+            'pero mi invitación sigue en pie 🐷';
+
+    }
+
+
+    // SELECCIONAR PELÍCULA
+
+    function choose(button) {
+
+        document.querySelectorAll('.choice').forEach(btn => {
+
+            btn.classList.remove('selected');
+
+            btn.setAttribute('aria-pressed', 'false');
+
+        });
+
+        button.classList.add('selected');
+
+        button.setAttribute('aria-pressed', 'true');
+
+        movie = button.dataset.movie;
+
+        document.getElementById('confirm').disabled = false;
+
+    }
+
+
+    // CONFIRMAR LA CITA
+
+    function finish() {
+
+        if (!movie) return;
+
+        document.getElementById('chosen-movie').textContent =
+            '🎬 ' + movie;
+
+        go(4);
+
+    }
+
+
+    // ENVIAR RESPUESTA POR WHATSAPP
+
+    function enviarWhatsApp() {
+
+        /*
+        IMPORTANTE:
+
+        REEMPLAZÁ EL NÚMERO DE ABAJO
+        POR TU NÚMERO DE WHATSAPP.
+
+        FORMATO ARGENTINA:
+        549 + CÓDIGO DE ÁREA + NÚMERO
+
+        SIN +, ESPACIOS NI GUIONES.
+        */
+
+        const telefono = "5491178239218";
+
+        const mensaje =
+`🐷❤️ ¡HOLA MI AMOR! ❤️🐷
+
+Acepto oficialmente nuestra cita de cine 🎬🍿
+
+Mi película elegida es:
+🎥 ${movie}
+
+📍 Moreno
+🌙 Función nocturna
+
+PD: Quiero pochoclos, besitos y abrazos cuando me asuste 🥹💕🐽
+
+¡Te amo! ❤️`;
+
+        const url =
+            `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+        window.open(url, "_blank");
+
+    }
+
+
+    // REINICIAR INVITACIÓN
+
+    function restart() {
+
+        movie = '';
+
+        document.querySelectorAll('.choice').forEach(btn => {
+
+            btn.classList.remove('selected');
+
+            btn.setAttribute('aria-pressed', 'false');
+
+        });
+
+        document.getElementById('confirm').disabled = true;
+
+        document.getElementById('no-message').textContent = '';
+
+        go(1);
+
+    }
+
+</script>
+
+</body>
+</html>
